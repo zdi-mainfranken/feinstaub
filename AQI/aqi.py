@@ -101,10 +101,13 @@ if __name__ == "__main__":
         cmd_set_mode(1);
         for t in range(15):
             values = cmd_query_data();
-            #if values is not None:
-            print("PM2.5: ", values[0], ", PM10: ", values[1])
+            try:
+                print("PM2.5: ", values[0], ", PM10: ", values[1])
+            except IndexError:
+                print("A strange error occured.")
             time.sleep(2)
 
+        
         # open stored data
         with open('/var/www/html/aqi.json') as json_data:
             data = json.load(json_data)
